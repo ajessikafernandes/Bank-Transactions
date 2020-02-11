@@ -1,0 +1,27 @@
+management:
+  server:
+    port:8080
+
+info:
+  app:
+    name: api-bank
+    description: bank financial transactions simulator
+    version: v0.0.1
+
+spring:
+  data:
+    mongodb:
+      database: bank-transactions
+      uri: mongodb://root:Bank!@localhost:4200
+      mongo.timeout.connect: 30000
+      mongo.timeout.socket: 30000
+      mongo.idle.time: 3000
+      profiles:
+        active: integration
+        devtools:
+          restart:
+            enabled: true
+          livereload:
+            enabled: true
+
+
