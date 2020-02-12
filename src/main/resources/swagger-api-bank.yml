@@ -1,0 +1,295 @@
+swagger: '2.0'
+info:
+  description: >-
+    API to simulate a bank's financial transactions.
+  version: 1.2.0
+  title: Bank API
+host: br.com.dbserver
+basePath: /v1
+tags:
+  - name: Client
+    description: Consulta de dados de um cliente.
+paths:
+  '/client/':
+    get:
+      tags:
+        - Client
+      summary: Para um dado cliente, retorna os dados pessoais do cliente e conta.
+      operationId: getClient
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: name
+          in: path
+          description: Nome do cliente para consulta.
+          required: true
+          type: string
+        - name: mail
+          in: path
+          description: Email do cliente para consulta.
+          required: true
+          type: string
+        - name: clientType
+          in: query
+          description: Status do exame a ser consultado no laboratório. Se não for informado, todos os status serão consultados.
+          required: false
+          type: string
+          enum:
+            - PESSOA_FISICA
+            - PESSOA_JURIDICA
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  '/client/new':
+    post:
+      tags:
+        - Client
+      summary: Cria um novo cliente.
+      operationId: newClient
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: name
+          in: path
+          description: Nome do cliente para consulta.
+          required: true
+          type: string
+        - name: mail
+          in: path
+          description: Email do cliente para consulta.
+          required: true
+          type: string
+        - name: clientType
+          in: query
+          description: Status do exame a ser consultado no laboratório. Se não for informado, todos os status serão consultados.
+          required: false
+          type: string
+          enum:
+            - PESSOA_FISICA
+            - PESSOA_JURIDICA
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  '/client/update':
+    put:
+      tags:
+        - Client
+      summary: Atualiza os dados de um determinado cliente.
+      operationId: updateClient
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: name
+          in: path
+          description: Nome do cliente para consulta.
+          required: true
+          type: string
+        - name: mail
+          in: path
+          description: Email do cliente para consulta.
+          required: true
+          type: string
+        - name: clientType
+          in: query
+          description: Status do exame a ser consultado no laboratório. Se não for informado, todos os status serão consultados.
+          required: false
+          type: string
+          enum:
+            - PESSOA_FISICA
+            - PESSOA_JURIDICA
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  '/client/delete':
+    delete:
+      tags:
+        - Client
+      summary: Para um dado cliente, retorna os dados pessoais do cliente e conta.
+      operationId: deleteClient
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: name
+          in: path
+          description: Nome do cliente para consulta.
+          required: true
+          type: string
+        - name: mail
+          in: path
+          description: Email do cliente para consulta.
+          required: true
+          type: string
+        - name: clientType
+          in: query
+          description: Status do exame a ser consultado no laboratório. Se não for informado, todos os status serão consultados.
+          required: false
+          type: string
+          enum:
+            - PESSOA_FISICA
+            - PESSOA_JURIDICA
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  '/client/account':
+    get:
+      tags:
+        - Account
+      summary: Retorna os dados da conta de um cliente.
+      operationId: getAccount
+      produces:
+        - application/json;charset=UTF-8
+      parameters:
+        - name: agency
+          in: path
+          description: Número da agência a ser consultada.
+          required: true
+          type: integer
+        - name: numberAccount
+          in: path
+          description: Número da conta de um cliente.
+          required: true
+          type: string
+        - name: balance
+          in: path
+          description: Saldo da conta de um cliente.
+          required: true
+          type: "string"
+          format: "double"
+        - name: statusConta
+          in: query
+          description: Status da conta a ser consultada do cliente. Se não for informado, todos os status serão consultados.
+          required: false
+          type: string
+          enum:
+            - ATIVO
+            - INATIVO
+            - BLOQUEADA
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+            additionalProperties:
+              type: integer
+              format: int64
+        '400':
+          description: Invalid Request
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '404':
+          description: Not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        '500':
+          description: Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+definitions:
+  ClientType:
+    type: string
+    enum:
+      - PESSOA_FISICA
+      - PESSOA_JURIDICA
+
+  Client:
+    type: object
+    properties:
+      name:
+        type: string
+      mail:
+        type: string
+      clientType:
+        type: string
+        enum:
+          - PESSOA_FISICA
+          - PESSOA_JURIDICA
+
+  Account:
+    type: object
+    properties:
+      agency:
+        type: integer
+      numberAccount:
+        type: integer
+      balance:
+        type: "string"
+        format: "double"
+      statusConta:
+        type: string
+        enum:
+          - ATIVO
+          - INATIVO
+          - BLOQUEADA
+
+  ErrorResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      message:
+        type: "string"
