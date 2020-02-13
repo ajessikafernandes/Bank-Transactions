@@ -37,6 +37,12 @@ paths:
           enum:
             - PESSOA_FISICA
             - PESSOA_JURIDICA
+        - name: account
+          in: query
+          description: Contas bancárias do cliente.
+          required: false
+          type: string
+          format: account
       responses:
         '200':
           description: OK
