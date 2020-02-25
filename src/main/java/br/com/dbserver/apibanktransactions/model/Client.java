@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
-import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +17,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "client")
 public class Client {
 
-    private ObjectId id;
+    @Id
+    private Long id;
     private String name;
     private String mail;
     private ClientType clientType;
 
-    private Account account;
+    private List<Account> account;
 
 }

@@ -4,20 +4,11 @@ info:
     description: bank financial transactions simulator
     version: v0.0.1
 
-server.port: 8081
+server:
+  port: 8082
 
 spring:
   data:
     mongodb:
       database: bank
-      uri: mongodb://root:Apoio2019!@localhost:27017
-
-#      profiles:
-#        active: integration
-#        devtools:
-#          restart:
-#            enabled: true
-#          livereload:
-#            enabled: true
-
-
+      uri: mongodb://root:passw0rd@localhost:27017/bank
