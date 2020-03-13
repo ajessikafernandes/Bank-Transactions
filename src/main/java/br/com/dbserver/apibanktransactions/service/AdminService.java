@@ -1,8 +1,7 @@
 package br.com.dbserver.apibanktransactions.service;
 
 import br.com.dbserver.apibanktransactions.error.NoRegisteredCustomers;
-import br.com.dbserver.apibanktransactions.model.Client;
-import br.com.dbserver.apibanktransactions.repository.ClientRepository;
+//import br.com.dbserver.apibanktransactions.repository.AccountStatementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +12,19 @@ import java.util.Objects;
 @Service
 public class AdminService {
 
-    ClientRepository repository;
+//    AccountStatementRepository repository;
+//
+//    public List<AccountStatement> clientList() {
+//        List<AccountStatement> client = repository.findAll();
+//        if (Objects.isNull(client)) {
+//            throw new NoRegisteredCustomers("Nenhum cliente cadastrado no sistema.");
+//        }
+//        return client;
+//    }
 
-    public List<Client> clientList() {
-        List<Client> client = repository.findAll();
-        if (Objects.isNull(client)) {
-            throw new NoRegisteredCustomers("Nenhum cliente cadastrado no sistema.");
-        }
-        return client;
-    }
+//    public BankAccount findByAccount(Integer numberAccount){
+//        BankAccount bankAccount = repository.findByAccount(numberAccount);
+//        return bankAccount;
+//    }
 
 }

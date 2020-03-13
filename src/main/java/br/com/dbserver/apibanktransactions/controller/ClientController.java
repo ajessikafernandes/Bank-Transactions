@@ -22,21 +22,22 @@ public class ClientController {
     ClientService clientService;
 
     @GetMapping("{id}")
-    public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id) {
-        Optional<Client> client = clientService.clientFindById(id);
-        if (client.isPresent()) {
-            return ResponseEntity.ok().body(client);
-        } else {
-            return ResponseEntity.badRequest().body(new ClientIdNotFound("resolver depois"));
-        }
+    public ResponseEntity findById(@PathVariable Long id) {
+        return clientService.findById(id)
+                .map(record -> ResponseEntity.ok().body(record))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("new")
-    public ResponseEntity<Object> createNewClient(@RequestBody @Valid Client client) {
+    public ResponseEntity<Object> createdNew(@RequestBody Client client) {
         Client newClient = clientService.newClient(client);
         return new ResponseEntity<>(clientService.newClient(newClient), HttpStatus.CREATED);
     }
 
+//    @PutMapping("id")
+//    public ResponseEntity update(@PathVariable("id") long id, @RequestBody Client client){
+//        return clientService.
+//    }
 
 
 }

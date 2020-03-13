@@ -20,17 +20,31 @@ public class ClientService {
     @Autowired
     ClientRepository repository;
 
-    public Optional<Client> clientFindById(Long id) {
-        Optional<Client> client = repository.findById(id);
-        if (Objects.isNull(client)) {
-            throw new ClientIdNotFound("Nenhum id de cliente encontrado.");
-        }
-        return client;
-    }
-
     public Client newClient(Client client) {
         Client clientIn = repository.save(client);
         return clientIn;
     }
+
+    public Optional<Client> findById(Long id) {
+        Optional<Client> client = repository.findById(id);
+        return client;
+    }
+
+    public Client update(Client client, Long id){
+        Optional<Client> clientIn = repository.findById(id);
+        if (Objects.isNull(clientIn)) {
+            throw new ClientIdNotFound("Nenhum id de cliente encontrado.");
+        } else {
+            repository.save(client);
+            return client;
+        }
+    }
+
+//    public Client disable(Client client, Long id){
+//        Optional<Client> clientIn = repository.findById(id);
+//        if (clientIn.isPresent()){
+//            Client client1 = clientIn.get();
+//        }
+//    }
 
 }
