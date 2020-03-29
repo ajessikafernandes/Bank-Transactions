@@ -1,2 +1,23 @@
 # JAVA-Bank-Transactions
-Simulate the main financial transactions of a banking institution.
+
+Simule as principais transações financeiras de uma instituição bancária.
+
+## Pré-requisitos
+
+Java 11.
+
+Maven.
+
+### Montando ambiente:
+
+Baixar o projeto usando o comando git clone.
+
+Executando pela linha de comando na pasta da raiz do projeto, crie o jar do projeto: 
+```
+./mvnw clean install
+```
+
+Para executar os testes unitários, use o comando: 
+```
+./mvnw test
+```
