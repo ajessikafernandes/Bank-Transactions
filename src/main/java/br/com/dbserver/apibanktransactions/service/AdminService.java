@@ -1,12 +1,8 @@
 package br.com.dbserver.apibanktransactions.service;
 
-import br.com.dbserver.apibanktransactions.error.NoRegisteredCustomers;
 //import br.com.dbserver.apibanktransactions.repository.AccountStatementRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Objects;
 
 @AllArgsConstructor
 @Service

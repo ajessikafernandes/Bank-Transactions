@@ -1,5 +1,6 @@
 package br.com.dbserver.apibanktransactions.model;
 
+import br.com.dbserver.apibanktransactions.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,28 +8,51 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Entity
-public class BankAccount implements Extract {
+public class BankAccount {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Integer accountNumber;
+    private Long accountNumber;
     private Double balance;
+    private Status status;
+
+//    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    private List<Extract> extracts;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;
 
-    public static void saque(double balance) {}
+    public void deposit(double value) {
+        balance += value;
+    }
 
-    public static void deposito(double balance) {}
+    public boolean withdraw(double value) {
+        if (this.balance >= value) {
+            this.balance -= value;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    public void transferencia(double balance, BankAccount bankAccount) {}
+    public boolean transfere(double valor, BankAccount destino) {
+        if (this.balance >= valor) {
+            this.balance -= valor;
+            destino.deposit(valor);
+            return true;
+        }
+        return false;
+    }
 
 }

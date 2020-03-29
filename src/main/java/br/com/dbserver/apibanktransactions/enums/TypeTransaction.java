@@ -1,13 +1,18 @@
 package br.com.dbserver.apibanktransactions.enums;
 
-public enum ClientType {
+public enum TypeTransaction {
 
-    PESSOA_FISICA(0, "Pessoa Juridica"),
-    PESSOA_JURIDICA(1, "Pessoa Juridica");
+    CRIACAO(0, "Criacao de conta"),
+    BLOQUEIO(1, "Bloqueio"),
+    CONSULTA(2, "Consulta"),
+    SAQUE(3, "Saque"),
+    DEPOSITO(4, "Deposito"),
+    TRANSFERENCIA(5, "Transferencia");
+
     private int id;
     private String message;
 
-    ClientType(int i, String active) {
+    TypeTransaction(int i, String active) {
     }
 
     void Errors(int id, String message) {

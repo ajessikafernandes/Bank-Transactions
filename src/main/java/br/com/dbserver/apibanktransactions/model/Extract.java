@@ -1,7 +1,29 @@
 package br.com.dbserver.apibanktransactions.model;
 
-public interface Extract {
+import br.com.dbserver.apibanktransactions.enums.Status;
+import br.com.dbserver.apibanktransactions.enums.TypeTransaction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
-    static void showData(){};
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+@Entity
+public class Extract {
+
+    @JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long accountNumber;
+    private LocalDateTime dateTime = LocalDateTime.now();
+    private TypeTransaction typeTransaction;
+    private Double balance;
+    private Status status;
+    private Long accountTransfer;
 
 }

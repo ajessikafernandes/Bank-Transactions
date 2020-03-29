@@ -1,13 +1,14 @@
 package br.com.dbserver.apibanktransactions.enums;
 
-public enum ClientType {
+public enum Status {
 
-    PESSOA_FISICA(0, "Pessoa Juridica"),
-    PESSOA_JURIDICA(1, "Pessoa Juridica");
+    ACTIVE(0, "Active"),
+    BLOCKED(1, "Blocked");
+
     private int id;
     private String message;
 
-    ClientType(int i, String active) {
+    Status(int i, String active) {
     }
 
     void Errors(int id, String message) {
