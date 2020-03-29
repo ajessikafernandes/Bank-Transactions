@@ -1,6 +1,7 @@
 package br.com.dbserver.apibanktransactions.controller;
 
-import br.com.dbserver.apibanktransactions.error.AccountNotFound;
+import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
+import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
 import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.service.ClientService;
 
@@ -40,7 +41,7 @@ public class ClientController {
     }
 
     //ok
-    @DeleteMapping(value= "{id}")
+    @DeleteMapping(value = "{id}")
     public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         clientService.delete(id);
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -49,13 +50,13 @@ public class ClientController {
     //ok
     @PutMapping("{id}")
     @Transactional
-    public ResponseEntity<Object> updatePet(@RequestBody @Valid Client client, @PathVariable(value = "id") Long id) {
+    public ResponseEntity<Object> update(@RequestBody @Valid Client client, @PathVariable(value = "id") Long id) {
         Optional<Client> clientIn = clientService.findById(id);
         if (clientIn.isPresent()) {
             Client client1 = clientService.update(client, id);
             return ResponseEntity.ok(clientService.update(client1, id));
         } else {
-            return ResponseEntity.badRequest().body(new AccountNotFound("client.id.not.found.message"));
+            return ResponseEntity.badRequest().body(new ClientNotFoundException("Client not found!"));
         }
     }
 }

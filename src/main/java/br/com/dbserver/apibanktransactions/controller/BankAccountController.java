@@ -31,7 +31,7 @@ public class BankAccountController {
 
     //ok
     @PutMapping("disable/{id}")
-    public ResponseEntity<?> disable(@PathVariable Long id){
+    public ResponseEntity<?> disable(@PathVariable Long id) {
         return new ResponseEntity<>(accountService.disable(id), HttpStatus.OK);
     }
 
@@ -44,14 +44,14 @@ public class BankAccountController {
 
     //ok
     @PutMapping("deposit/{accountNumber}/{value}")
-    public ResponseEntity<?> deposit(@PathVariable Long accountNumber, @PathVariable Double value){
-        return new ResponseEntity<>(accountService.deposit(accountNumber,value), HttpStatus.OK);
+    public ResponseEntity<?> deposit(@PathVariable Long accountNumber, @PathVariable Double value) {
+        return new ResponseEntity<>(accountService.deposit(accountNumber, value), HttpStatus.OK);
     }
 
     //+-
     @PutMapping("withdraw/{accountNumber}/{value}")
-    public ResponseEntity<?> withdraw(@PathVariable Long accountNumber, @PathVariable Double value){
-        return new ResponseEntity<>(accountService.withdraw(accountNumber,value), HttpStatus.OK);
+    public ResponseEntity<?> withdraw(@PathVariable Long accountNumber, @PathVariable Double value) {
+        return new ResponseEntity<>(accountService.withdraw(accountNumber, value), HttpStatus.OK);
     }
 
 }

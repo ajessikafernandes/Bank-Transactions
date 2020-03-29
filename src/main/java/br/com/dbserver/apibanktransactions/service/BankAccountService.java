@@ -1,10 +1,9 @@
 package br.com.dbserver.apibanktransactions.service;
 
 import br.com.dbserver.apibanktransactions.enums.Status;
-import br.com.dbserver.apibanktransactions.error.AccountNotFound;
+import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
 import br.com.dbserver.apibanktransactions.model.BankAccount;
 
-import br.com.dbserver.apibanktransactions.model.Extract;
 import br.com.dbserver.apibanktransactions.repository.BankAccountRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +30,16 @@ public class BankAccountService {
     //ok
     public BankAccount disable(Long id) {
         Optional<BankAccount> accountIn = repository.findById(id);
-        if (accountIn.isPresent()){
+        if (accountIn.isPresent()) {
             BankAccount account1 = accountIn.get();
-            if (account1.getStatus().equals(Status.ACTIVE)){
+            if (account1.getStatus().equals(Status.ACTIVE)) {
                 account1.setStatus(Status.BLOCKED);
             }
             repository.save(account1);
             extractService.extractAccountBlock(accountIn);
             return account1;
         } else {
-            throw new AccountNotFound("Account not found!");
+            throw new AccountNotFoundException("Account not found!");
         }
     }
 
@@ -52,31 +51,31 @@ public class BankAccountService {
     }
 
     //ok
-    public BankAccount deposit (Long accountNumber, double value){
+    public BankAccount deposit(Long accountNumber, double value) {
         Optional<BankAccount> account = repository.findByAccountNumber(accountNumber);
-        if (account.isPresent()){
+        if (account.isPresent()) {
             BankAccount account1 = account.get();
             account1.deposit(value);
             repository.save(account1);
             extractService.extractDeposit(account, account1);
             return account1;
         } else {
-            throw new AccountNotFound("Account not found!");
+            throw new AccountNotFoundException("Account not found!");
         }
     }
 
     //ok
-    public BankAccount withdraw (Long accountNumber, double value){
+    public BankAccount withdraw(Long accountNumber, double value) {
         Optional<BankAccount> account = repository.findByAccountNumber(accountNumber);
-        if (account.isPresent()){
+        if (account.isPresent()) {
             BankAccount account1 = account.get();
-            if(account1.getBalance() >= value)
-            account1.withdraw(value);
+            if (account1.getBalance() >= value)
+                account1.withdraw(value);
             repository.save(account1);
             extractService.extractWithdraw(account);
             return account1;
         } else {
-            throw new AccountNotFound("Account not found!");
+            throw new AccountNotFoundException("Account not found!");
         }
     }
 

@@ -25,9 +25,6 @@ public class BankAccount {
     private Double balance;
     private Status status;
 
-//    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    private List<Extract> extracts;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -46,7 +43,7 @@ public class BankAccount {
         }
     }
 
-    public boolean transfere(double valor, BankAccount destino) {
+    public boolean transfer(double valor, BankAccount destino) {
         if (this.balance >= valor) {
             this.balance -= valor;
             destino.deposit(valor);

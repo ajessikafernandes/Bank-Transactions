@@ -1,6 +1,7 @@
 package br.com.dbserver.apibanktransactions.service;
 
-import br.com.dbserver.apibanktransactions.error.AccountNotFound;
+import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
+import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
 import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.repository.ClientRepository;
 
@@ -33,7 +34,7 @@ public class ClientService {
             repository.save(client);
             return client;
         } else {
-            throw new AccountNotFound("client.id.not.found.message");
+            throw new ClientNotFoundException("Client not found!");
         }
     }
 

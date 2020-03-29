@@ -16,7 +16,7 @@ public class ExtractService {
     @Autowired
     ExtractRepository repository;
 
-    public List<Extract> showData(Long accountNUmber){
+    public List<Extract> showData(Long accountNUmber) {
         List<Extract> extracts = repository.findAllByAccountNumber(accountNUmber);
         return extracts;
     }
