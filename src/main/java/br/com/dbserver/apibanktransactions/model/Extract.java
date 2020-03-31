@@ -25,5 +25,6 @@ public class Extract {
     private Double balance;
     private Status status;
     private Long accountTransfer;
+    private Double valueTransfer;
 
 }

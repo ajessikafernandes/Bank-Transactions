@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,10 +41,10 @@ public class BankAccount {
         }
     }
 
-    public boolean transfer(double valor, BankAccount destino) {
-        if (this.balance >= valor) {
-            this.balance -= valor;
-            destino.deposit(valor);
+    public boolean transfer(BankAccount accountDestination, double value) {
+        if (this.balance >= value) {
+            this.balance -= value;
+            accountDestination.deposit(value);
             return true;
         }
         return false;

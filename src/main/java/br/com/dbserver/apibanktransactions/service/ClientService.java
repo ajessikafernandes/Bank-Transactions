@@ -1,6 +1,5 @@
 package br.com.dbserver.apibanktransactions.service;
 
-import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
 import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
 import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.repository.ClientRepository;
@@ -16,19 +15,19 @@ public class ClientService {
     @Autowired
     ClientRepository repository;
 
-    //get -> ok
-    public Optional<Client> findById(Long id) {
+    public Optional<Client> findClientById(Long id) {
         Optional<Client> client = repository.findById(id);
+        if (!client.isPresent()){
+            throw new ClientNotFoundException("Client not found!");
+        }
         return client;
     }
 
-    //post -> ok
-    public Client newClient(Client client) {
-        return repository.save(client);
+    public void createdClient(Client client) {
+        repository.save(client);
     }
 
-    //put
-    public Client update(Client client, Long id) {
+    public Client updateClientData(Client client, Long id) {
         Optional<Client> clientIn = repository.findById(id);
         if (clientIn.isPresent()) {
             repository.save(client);
@@ -38,8 +37,8 @@ public class ClientService {
         }
     }
 
-    //delete -> ok
-    public void delete(Long id) {
+    public void deleteClient(Long id) {
         repository.deleteById(id);
     }
+
 }

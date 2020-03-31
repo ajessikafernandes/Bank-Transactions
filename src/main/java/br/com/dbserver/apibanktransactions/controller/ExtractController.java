@@ -22,10 +22,10 @@ public class ExtractController {
     @Autowired
     ExtractService service;
 
-    //ok
     @GetMapping(value = "consult/{accountNumber}")
-    public ResponseEntity<List<Extract>> consult(@PathVariable Long accountNumber) {
-        List<Extract> obj = service.showData(accountNumber);
+    public ResponseEntity<List<Extract>> consultBankAccountStatement(@PathVariable Long accountNumber) {
+        List<Extract> obj = service.showAccountData(accountNumber);
         return ResponseEntity.ok().body(obj);
     }
+
 }
