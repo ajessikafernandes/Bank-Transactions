@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "ac675e8a-2718-4c2d-8dd4-43ba5ea1ddc4",
+		"name": "br.com.dbserver.apibanktransactions",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CLIENT-By-Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4200/client/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"client",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENT-By-Id-not-found",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost:4200/client/3",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"client",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENT-new",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Ozzy\",\n\t\"mail\": \"ozzy@teste.com.br\",\n\t\"clientType\": 1\n}"
+				},
+				"url": {
+					"raw": "localhost:4200/client/new",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"client",
+						"new"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENT-update-by-id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": 1,\n\t\"name\": \"Ozzy\",\n\t\"mail\": \"ozzy@teste.com.br\",\n\t\"clientType\": 1\n}"
+				},
+				"url": {
+					"raw": "localhost:4200/client/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"client",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CLIENT-delete-by-id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:4200/client/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"client",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-new",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"accountNumber\": 222589,\n\t\"balance\": 6000.50,\n\t\"status\": 0,\n\t\"client_id\": [1]\n}"
+				},
+				"url": {
+					"raw": "localhost:4200/account/",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-consult-by-accountNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/account/consult/123456",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						"consult",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-disable",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4200/account/disable/4",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						"disable",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-deposit",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4200/account/deposit/123456/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						"deposit",
+						"123456",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-withdraw",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/account/withdraw/123456/1000",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						"withdraw",
+						"123456",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-extract",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4200/extract/consult/123789",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"extract",
+						"consult",
+						"123789"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCOUNT-transfer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/account/transfer/123789/3000/123456",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"account",
+						"transfer",
+						"123789",
+						"3000",
+						"123456"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN-sum-all-balances",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/admin/accounts/balance",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"admin",
+						"accounts",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADMIN-list-clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/admin/list",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"admin",
+						"list"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
