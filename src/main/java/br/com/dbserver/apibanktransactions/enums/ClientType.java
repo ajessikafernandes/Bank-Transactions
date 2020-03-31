@@ -2,8 +2,8 @@ package br.com.dbserver.apibanktransactions.enums;
 
 public enum ClientType {
 
-    PESSOA_FISICA(0, "Pessoa Juridica"),
-    PESSOA_JURIDICA(1, "Pessoa Juridica");
+    PF(0, "Pessoa Juridica"),
+    PJ(1, "Pessoa Juridica");
     private int id;
     private String message;
 
