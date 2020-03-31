@@ -1,26 +1,40 @@
 package br.com.dbserver.apibanktransactions.service;
 
-//import br.com.dbserver.apibanktransactions.repository.AccountStatementRepository;
-import lombok.AllArgsConstructor;
+import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
+import br.com.dbserver.apibanktransactions.model.BankAccount;
+import br.com.dbserver.apibanktransactions.model.Client;
+import br.com.dbserver.apibanktransactions.repository.BankAccountRepository;
+import br.com.dbserver.apibanktransactions.repository.ClientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@AllArgsConstructor
+import java.util.List;
+
 @Service
 public class AdminService {
 
-//    AccountStatementRepository repository;
-//
-//    public List<AccountStatement> clientList() {
-//        List<AccountStatement> client = repository.findAll();
-//        if (Objects.isNull(client)) {
-//            throw new NoRegisteredCustomers("Nenhum cliente cadastrado no sistema.");
-//        }
-//        return client;
-//    }
 
-//    public BankAccount findByAccount(Integer numberAccount){
-//        BankAccount bankAccount = repository.findByAccount(numberAccount);
-//        return bankAccount;
-//    }
+    @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    BankAccountRepository bankAccountRepository;
+
+    public List<Client> listOfClientsAndTheirAccounts() {
+        List<Client> client = clientRepository.findAll();
+        if (client.isEmpty()) {
+            throw new ClientNotFoundException("No clients enrolled");
+        }
+        return client;
+    }
+
+    public double sumOfAllBalancesOfAllExistingAccounts(){
+        List<BankAccount> listBalance = bankAccountRepository.findAll();
+        double amount = 0;
+        for ( BankAccount account : listBalance) {
+            amount += account.getBalance();
+        }
+        return amount;
+    }
 
 }
