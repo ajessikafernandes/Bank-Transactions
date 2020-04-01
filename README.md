@@ -21,3 +21,7 @@ Para executar os testes unitários, use o comando:
 ```
 ./mvnw test
 ```
+### Acesso a documentação:
+```
+http://localhost:4200/swagger-ui.html
+```
