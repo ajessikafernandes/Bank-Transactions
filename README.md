@@ -22,6 +22,12 @@ Para executar os testes unitários, use o comando:
 ./mvnw test
 ```
 ### Acesso a documentação:
+
+Para acessar a documentação gerada automaticamente pelo swagger no navegador, o projeto deverá estar sendo executado, depois acesse o link:
 ```
 http://localhost:4200/swagger-ui.html
+```
+Para acessar a documentação usando o link http://editor.swagger.io/, utilize o arquivo da pasta resources :
+```
+swagger-api-bank.yaml
 ```
