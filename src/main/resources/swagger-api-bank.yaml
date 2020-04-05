@@ -1,0 +1,373 @@
+swagger: '2.0'
+info:
+  description: Simulate the main financial transactions of a banking institution.
+  version: '1.0'
+  title: API Bank Transactions
+  contact:
+    email: jessika.fernandes@dbserver.com.br
+host: 'localhost:4200'
+basePath: /
+tags:
+  - name: admin
+    description: Clients list and overall balance.
+  - name: bank-account
+    description: Returns bank account details.
+  - name: client
+    description: 'For a given client, it returns the customers personal data and account.'
+  - name: extract
+    description: Return a bank account statement.
+paths:
+  /account/:
+    post:
+      tags:
+        - bank-account
+      summary: Created bank account.
+      operationId: createdBankAccountUsingPOST
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: bankAccount
+          description: bankAccount
+          required: true
+          schema:
+            $ref: '#/definitions/BankAccount'
+      responses:
+        '201':
+          description: Created
+  '/account/consult/{accountNumber}':
+    get:
+      tags:
+        - bank-account
+      summary: See bank account details.
+      operationId: consultBankAccountDetailsUsingGET
+      parameters:
+        - name: accountNumber
+          in: path
+          description: accountNumber
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/BankAccount'
+        '404':
+          description: Not Found
+  '/account/deposit/{accountNumber}/{value}':
+    put:
+      tags:
+        - bank-account
+      summary: Deposit money into an bank.
+      operationId: depositMoneyIntoAnBankAccountUsingPUT
+      consumes:
+        - application/json
+      parameters:
+        - name: accountNumber
+          in: path
+          description: accountNumber
+          required: true
+          type: integer
+          format: int64
+        - name: value
+          in: path
+          description: value
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  '/account/disable/{id}':
+    put:
+      tags:
+        - bank-account
+      summary: Disable bank account
+      operationId: disableBankAccountUsingPUT
+      consumes:
+        - application/json
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  '/account/transfer/{account}/{balance}/{accountDestination}':
+    put:
+      tags:
+        - bank-account
+      summary: Transfer of value between accounts.
+      operationId: transferOfValueBetweenAccountsUsingPUT
+      consumes:
+        - application/json
+      parameters:
+        - name: account
+          in: path
+          description: account
+          required: true
+          type: integer
+          format: int64
+        - name: accountDestination
+          in: path
+          description: accountDestination
+          required: true
+          type: integer
+          format: int64
+        - name: balance
+          in: path
+          description: balance
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  '/account/withdraw/{accountNumber}/{value}':
+    put:
+      tags:
+        - bank-account
+      summary: Withdraw value from an bank account.
+      operationId: withdrawValueFromAnBankAccountUsingPUT
+      consumes:
+        - application/json
+      parameters:
+        - name: accountNumber
+          in: path
+          description: accountNumber
+          required: true
+          type: integer
+          format: int64
+        - name: value
+          in: path
+          description: value
+          required: true
+          type: number
+          format: double
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  /admin/accounts/balance:
+    get:
+      tags:
+        - admin
+      summary: Sum of all balances of all existing accounts.
+      operationId: sumOfAllBalancesOfAllExistingAccountsUsingGET
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  /admin/list:
+    get:
+      tags:
+        - admin
+      summary: List of clients and their accounts.
+      operationId: listOfClientsAndTheirAccountsUsingGET
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '404':
+          description: Not Found
+  /client/new:
+    post:
+      tags:
+        - client
+      summary: Created client.
+      operationId: createdClientUsingPOST
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: client
+          description: client
+          required: true
+          schema:
+            $ref: '#/definitions/Client'
+      responses:
+        '201':
+          description: Created
+  '/client/{id}':
+    get:
+      tags:
+        - client
+      summary: Find Client by id.
+      operationId: findClientByIdUsingGET
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Client'
+        '404':
+          description: Not Found
+    put:
+      tags:
+        - client
+      summary: Update client data.
+      operationId: updateClientDataUsingPUT
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: client
+          description: client
+          required: true
+          schema:
+            $ref: '#/definitions/Client'
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: object
+        '201':
+          description: Created
+        '404':
+          description: Not Found
+    delete:
+      tags:
+        - client
+      summary: Delete client.
+      operationId: deleteClientUsingDELETE
+      parameters:
+        - name: id
+          in: path
+          description: id
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+        '204':
+          description: No Content
+  '/extract/consult/{accountNumber}':
+    get:
+      tags:
+        - extract
+      summary: Consult bank account statement.
+      operationId: consultBankAccountStatementUsingGET
+      parameters:
+        - name: accountNumber
+          in: path
+          description: accountNumber
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Extract'
+        '404':
+          description: Not Found
+definitions:
+  BankAccount:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      id:
+        type: integer
+        format: int64
+      status:
+        type: string
+        enum:
+          - ACTIVE
+          - BLOCKED
+    title: BankAccount
+  Client:
+    type: object
+    properties:
+      accounts:
+        type: array
+        items:
+          $ref: '#/definitions/BankAccount'
+      clientType:
+        type: string
+        enum:
+          - PF
+          - PJ
+      id:
+        type: integer
+        format: int64
+      mail:
+        type: string
+      name:
+        type: string
+    title: Client
+  Extract:
+    type: object
+    properties:
+      accountNumber:
+        type: integer
+        format: int64
+      accountTransfer:
+        type: integer
+        format: int64
+      balance:
+        type: number
+        format: double
+      dateTime:
+        type: string
+        format: date-time
+      status:
+        type: string
+        enum:
+          - ACTIVE
+          - BLOCKED
+      typeTransaction:
+        type: string
+        enum:
+          - CRIACAO
+          - BLOQUEIO
+          - CONSULTA
+          - SAQUE
+          - DEPOSITO
+          - TRANSFERENCIA
+      valueTransfer:
+        type: number
+        format: double
+    title: Extract
