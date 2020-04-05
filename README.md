@@ -21,7 +21,7 @@ Para executar os testes unitários, use o comando:
 ```
 ./mvnw test
 ```
-### Acesso a documentação:
+### Acesso a documentação com Swagger:
 
 Para acessar a documentação gerada automaticamente pelo swagger no navegador, o projeto deverá estar sendo executado, depois acesse o link:
 ```
@@ -31,3 +31,11 @@ Para acessar a documentação usando o link http://editor.swagger.io/, utilize o
 ```
 swagger-api-bank.yaml
 ```
+### Acesso as collections usando o Postman:
+
+Faça o download do arquivo na pasta resources :
+```
+postman_collection.json
+```
+Import o arquivo no postman para acessar as collections.
+
