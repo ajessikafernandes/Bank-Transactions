@@ -37,8 +37,9 @@ public class ClientService {
         }
     }
 
-    public void deleteClient(Long id) {
+    public boolean deleteClient(Long id) {
         repository.deleteById(id);
+        return true;
     }
 
 }
