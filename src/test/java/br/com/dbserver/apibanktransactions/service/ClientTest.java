@@ -1,10 +1,8 @@
 package br.com.dbserver.apibanktransactions.service;
 
 import br.com.dbserver.apibanktransactions.enums.ClientType;
-import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
 import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.repository.ClientRepository;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,11 +32,13 @@ public class ClientTest {
                 .thenReturn(Optional.of(client));
     }
 
-    @Test
-    public void clientIsPresent(){
-        Client client = getClient();
-        Mockito.when(repository.findById(client.getId())).thenReturn(Optional.of(client));
-        Assert.assertEquals("New Client", client.getName());
+    private Client getClient(){
+        Client client = new Client();
+        client.setId(Long.valueOf(10));
+        client.setName("Client 1");
+        client.setMail("new.client@teste.com");
+        client.setClientType(ClientType.PF);
+        return client;
     }
 
     @Test
@@ -48,27 +48,37 @@ public class ClientTest {
         Assert.assertNotEquals("Client", client.getName());
     }
 
-    @Test(expected = ClientNotFoundException.class)
-    public void clientNotFound(){
-        Mockito.when(repository.findById(any()));
-        Assert.assertNull(Client.class);
+    @Test
+    public void newClient(){
+        Client clientSave = new Client();
+        clientSave.setId(Long.valueOf(11));
+        clientSave.setName("Client 2");
+        clientSave.setMail("client.2@teste.com");
+        clientSave.setClientType(ClientType.PJ);
+        Mockito.when(repository.save(any(Client.class))).thenReturn(clientSave);
     }
 
     @Test
     public void alterDataClient(){
         Client client = getClient();
-        Mockito.when(repository.findById(client.getId())).thenReturn(Optional.of(client));
-        service.updateClientData(client, client.getId());
+        clientIsPresent();
         client.setMail("new.email@teste.com");
+        service.updateClientData(client, client.getId());
         Assert.assertEquals("new.email@teste.com", client.getMail());
     }
 
-    private Client getClient(){
-        Client client = new Client();
-        client.setName("New Client");
-        client.setMail("new.client@teste.com");
-        client.setClientType(ClientType.PF);
-        return client;
+    @Test
+    public void clientIsPresent(){
+        Client client = getClient();
+        Mockito.when(repository.findById(client.getId())).thenReturn(Optional.of(client));
+        Assert.assertEquals("Client 1", client.getName());
+    }
+
+    @Test
+    public void deleteClient(){
+        Client client = getClient();
+        boolean deleted = service.deleteClient(client.getId());
+        Assert.assertTrue(true);
     }
 
 }
