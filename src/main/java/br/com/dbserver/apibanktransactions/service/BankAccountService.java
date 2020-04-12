@@ -20,10 +20,10 @@ public class BankAccountService {
     @Autowired
     ExtractService extractService;
 
-    public Boolean createdBankAccount(BankAccount bankAccount) {
+    public BankAccount createdBankAccount(BankAccount bankAccount) {
         BankAccount accountIn = repository.save(bankAccount);
         extractService.extractCreateAccount(Optional.of(accountIn));
-        return true;
+        return accountIn;
     }
 
     public BankAccount disableBankAccount(Long id) {

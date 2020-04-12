@@ -1,16 +1,12 @@
 package br.com.dbserver.apibanktransactions.service;
 
-import br.com.dbserver.apibanktransactions.enums.ClientType;
 import br.com.dbserver.apibanktransactions.enums.Status;
 import br.com.dbserver.apibanktransactions.model.BankAccount;
-import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.repository.BankAccountRepository;
-import br.com.dbserver.apibanktransactions.repository.ClientRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,9 +17,6 @@ import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
 public class BanckAccountTest {
-
-    @InjectMocks
-    private BankAccountService service;
 
     @Mock
     private BankAccountRepository repository;
@@ -63,7 +56,7 @@ public class BanckAccountTest {
     }
 
     @Test
-    public void AccountNotEquals(){
+    public void accountNotEquals(){
         BankAccount account = getAccount();
         Mockito.when(repository.findById(account.getId())).thenReturn(Optional.of(account));
         Assert.assertNotEquals(Long.valueOf(666666), account.getAccountNumber());
