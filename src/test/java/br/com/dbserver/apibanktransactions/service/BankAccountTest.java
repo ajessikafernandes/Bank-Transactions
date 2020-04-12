@@ -3,7 +3,6 @@ package br.com.dbserver.apibanktransactions.service;
 import br.com.dbserver.apibanktransactions.enums.Status;
 import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
 import br.com.dbserver.apibanktransactions.model.BankAccount;
-import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.repository.BankAccountRepository;
 import org.junit.Assert;
 import org.junit.Before;
