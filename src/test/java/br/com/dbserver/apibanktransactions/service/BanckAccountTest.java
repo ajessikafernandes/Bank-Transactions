@@ -66,7 +66,7 @@ public class BanckAccountTest {
     public void AccountNotEquals(){
         BankAccount account = getAccount();
         Mockito.when(repository.findById(account.getId())).thenReturn(Optional.of(account));
-        Assert.assertNotEquals(Long.valueOf(852964), account.getAccountNumber());
+        Assert.assertNotEquals(Long.valueOf(666666), account.getAccountNumber());
     }
 
 }
