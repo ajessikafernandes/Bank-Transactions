@@ -55,4 +55,13 @@ public class BanckAccountTest {
         Assert.assertTrue(true);
     }
 
+    @Test
+    public void accountIsPresent(){
+        BankAccount account = getAccount();
+        Mockito.when(repository.findByAccountNumber(account.getAccountNumber())).thenReturn(Optional.of(account));
+        Assert.assertEquals(Long.valueOf(951753), account.getAccountNumber());
+    }
+
+
+
 }
