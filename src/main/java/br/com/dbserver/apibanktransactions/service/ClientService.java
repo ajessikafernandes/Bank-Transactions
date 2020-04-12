@@ -23,8 +23,9 @@ public class ClientService {
         return client;
     }
 
-    public void createdClient(Client client) {
+    public boolean createdClient(Client client) {
         repository.save(client);
+        return true;
     }
 
     public Client updateClientData(Client client, Long id) {
