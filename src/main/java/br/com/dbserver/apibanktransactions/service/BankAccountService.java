@@ -20,10 +20,10 @@ public class BankAccountService {
     @Autowired
     ExtractService extractService;
 
-    public BankAccount createdBankAccount(BankAccount bankAccount) {
+    public Boolean createdBankAccount(BankAccount bankAccount) {
         BankAccount accountIn = repository.save(bankAccount);
-        extractService.extractCreateAccount(Optional.of(accountIn));
-        return accountIn;
+        extractService.extractCreateAccount(accountIn);
+        return true;
     }
 
     public BankAccount disableBankAccount(Long id) {
@@ -34,7 +34,7 @@ public class BankAccountService {
                 account1.setStatus(Status.BLOCKED);
             }
             repository.save(account1);
-            extractService.extractAccountBlock(accountIn);
+            extractService.extractAccountBlock(account1);
             return account1;
         } else {
             throw new AccountNotFoundException("Account not found!");
@@ -44,7 +44,7 @@ public class BankAccountService {
     public Optional<BankAccount> consultBankAccountDetails(Long accountNumber) {
         Optional<BankAccount> account = repository.findByAccountNumber(accountNumber);
         if (account.isPresent()) {
-            extractService.extractConsult(account);
+            extractService.extractConsult(account.get());
             return account;
         } else {
             throw new AccountNotFoundException("Account not found!");
@@ -57,7 +57,7 @@ public class BankAccountService {
             BankAccount account1 = account.get();
             account1.deposit(value);
             repository.save(account1);
-            extractService.extractDeposit(account, Optional.of(account1));
+            extractService.extractDeposit(account.get(), account1);
             return account1;
         } else {
             throw new AccountNotFoundException("Account not found!");
@@ -71,7 +71,7 @@ public class BankAccountService {
             if (account1.getBalance() >= value)
                 account1.withdraw(value);
             repository.save(account1);
-            extractService.extractWithdraw(account);
+            extractService.extractWithdraw(account.get());
             return account1;
         } else {
             throw new AccountNotFoundException("Account not found!");

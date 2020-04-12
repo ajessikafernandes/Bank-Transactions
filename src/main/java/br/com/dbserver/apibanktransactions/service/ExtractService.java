@@ -22,45 +22,45 @@ public class ExtractService {
         return extracts;
     }
 
-    private void setAccount(Optional<BankAccount> account, Extract ex) {
-        ex.setAccountNumber(account.get().getAccountNumber());
-        ex.setBalance(account.get().getBalance());
-        ex.setStatus(account.get().getStatus());
+    private void setAccount(BankAccount account, Extract ex) {
+        ex.setAccountNumber(account.getAccountNumber());
+        ex.setBalance(account.getBalance());
+        ex.setStatus(account.getStatus());
     }
 
-    public void extractCreateAccount(Optional<BankAccount> account) {
+    public void extractCreateAccount(BankAccount account) {
         Extract ex = new Extract();
         ex.setTypeTransaction(TypeTransaction.CRIACAO);
         setAccount(account, ex);
         repository.save(ex);
     }
 
-    public void extractAccountBlock(Optional<BankAccount> account) {
+    public void extractAccountBlock(BankAccount account) {
         Extract ex = new Extract();
         ex.setTypeTransaction(TypeTransaction.BLOQUEIO);
         setAccount(account, ex);
         repository.save(ex);
     }
 
-    public void extractConsult(Optional<BankAccount> account) {
+    public void extractConsult(BankAccount account) {
         Extract ex = new Extract();
         ex.setTypeTransaction(TypeTransaction.CONSULTA);
         setAccount(account, ex);
         repository.save(ex);
     }
 
-    public void extractWithdraw(Optional<BankAccount> account) {
+    public void extractWithdraw(BankAccount account) {
         Extract ex = new Extract();
         ex.setTypeTransaction(TypeTransaction.SAQUE);
         setAccount(account, ex);
         repository.save(ex);
     }
 
-    public void extractDeposit(Optional<BankAccount> account, Optional<BankAccount> account1) {
+    public void extractDeposit(BankAccount account, BankAccount account1) {
         Extract ex = new Extract();
         ex.setTypeTransaction(TypeTransaction.DEPOSITO);
         setAccount(account, ex);
-        ex.setAccountTransfer(account1.get().getAccountNumber());
+        ex.setAccountTransfer(account1.getAccountNumber());
         repository.save(ex);
     }
 
@@ -75,7 +75,7 @@ public class ExtractService {
         ex.setValueTransfer(valueTransfer);
         System.out.println("Extract transfer : " + valueTransfer);
         repository.save(ex);
-        extractDeposit(Optional.of(account2), Optional.of(account1));
+        extractDeposit(account2, account1);
     }
 
 }
