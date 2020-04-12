@@ -29,9 +29,9 @@ public class BankOperationsTest {
 
     @Before
     public void setUp() {
-        BankAccount bankAccount = getAccount();
-        Mockito.when(repository.findById(bankAccount.getId()))
-                .thenReturn(Optional.of(bankAccount));
+        BankAccount account = getAccount();
+        Mockito.when(repository.findById(account.getId()))
+                .thenReturn(Optional.of(account));
     }
 
     private BankAccount getAccount(){
