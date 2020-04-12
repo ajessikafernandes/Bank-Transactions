@@ -60,7 +60,7 @@ public class ClientTest {
     }
 
     @Test
-    public void ClientNotEquals(){
+    public void clientNotEquals(){
         Client client = getClient();
         Mockito.when(repository.findById(client.getId())).thenReturn(Optional.of(client));
         Assert.assertNotEquals("Client", client.getName());
