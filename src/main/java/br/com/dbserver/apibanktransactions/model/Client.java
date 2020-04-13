@@ -5,7 +5,6 @@ import br.com.dbserver.apibanktransactions.enums.ClientType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
-import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
 @Entity
 public class Client {
 

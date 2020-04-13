@@ -21,7 +21,6 @@ public class BankAccountController {
     @Autowired
     BankAccountService accountService;
 
-    //confirmar json
     @PostMapping
     public ResponseEntity<Object> createdBankAccount(@RequestBody BankAccount bankAccount) {
         return new ResponseEntity<>(accountService.createdBankAccount(bankAccount), HttpStatus.CREATED);
@@ -43,7 +42,6 @@ public class BankAccountController {
         return new ResponseEntity<>(accountService.depositMoneyIntoAnBankAccount(accountNumber, value), HttpStatus.OK);
     }
 
-    //confirmar json
     @PutMapping("withdraw/{accountNumber}/{value}")
     public ResponseEntity<?> withdrawValueFromAnBankAccount(@PathVariable Long accountNumber, @PathVariable double value) {
         return new ResponseEntity<>(accountService.withdrawValueFromAnBankAccount(accountNumber, value), HttpStatus.OK);

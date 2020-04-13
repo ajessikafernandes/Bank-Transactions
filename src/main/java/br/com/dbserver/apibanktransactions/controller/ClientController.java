@@ -1,13 +1,11 @@
 package br.com.dbserver.apibanktransactions.controller;
 
-import br.com.dbserver.apibanktransactions.exception.AccountNotFoundException;
 import br.com.dbserver.apibanktransactions.exception.ClientNotFoundException;
 import br.com.dbserver.apibanktransactions.model.Client;
 import br.com.dbserver.apibanktransactions.service.ClientService;
 
 import lombok.AllArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
